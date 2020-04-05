@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { MDBInput, MDBCol } from "mdbreact";
+import { MDBCol } from "mdbreact";
 
-import Task from "../components/Tasks";
-import EntityDetails from "../containers/EntityDetails";
+import Tasks from "../components/Tasks";
+import EntityDetails from "./EntityDetails";
 
-class TaskContainer extends Component {
+class TasksContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,18 +44,13 @@ class TaskContainer extends Component {
 
   render() {
     const searchbar = (
-      <MDBCol
-        style={{
-          marginLeft: "15%",
-          marginRight: "15%",
-        }}
-      >
-        <MDBInput
+      <MDBCol md='12'>
+        <input
+          className='form-control'
           placeholder='Search'
           input
           type='text'
           onChange={this.filterTasks}
-          className=' mr-sm-2'
         />
       </MDBCol>
     );
@@ -63,7 +58,7 @@ class TaskContainer extends Component {
     const showTasks = this.state.tasks.map((task, index) => {
       index = index + 1;
       return (
-        <Task
+        <Tasks
           key={index}
           pretty_name={task.pretty_name}
           type={task.type}
@@ -79,13 +74,14 @@ class TaskContainer extends Component {
 
     const filteredTasks = this.state.filtered.map((task, index) => {
       return (
-        <Task
+        <Tasks
           key={index}
           pretty_name={task.pretty_name}
           type={task.type}
           passive={task.passive}
           description={task.description}
           reference={task.references}
+          clicked={() => this.taskSelectedHandler(index)}
           allowed_types={task.allowed_types}
           examples={task.example_entities}
         />
@@ -103,4 +99,4 @@ class TaskContainer extends Component {
   }
 }
 
-export default TaskContainer;
+export default TasksContainer;

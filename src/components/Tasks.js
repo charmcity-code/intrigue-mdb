@@ -3,33 +3,30 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCardTitle,
   MDBCardText,
   MDBCol,
 } from "mdbreact";
 
-const task = (props) => (
-  <MDBCard
-    className='task'
-    style={{
-      marginLeft: "15%",
-      marginRight: "50%",
-      marginTop: "10px",
-      paddingLeft: "4px",
-      backgroundColor: "#cfcfcf",
-    }}
-    onClick={props.clicked}
-  >
-    <MDBCard.Title>{props.pretty_name}</MDBCard.Title>
-    <MDBCard.Text>Type: {props.type}</MDBCard.Text>
-    <MDBCard.Text>Passive: {String(props.passive)}</MDBCard.Text>
-    <MDBCard.Text>Description: {props.description}</MDBCard.Text>
-    <MDBCard.Text>References: {props.references}</MDBCard.Text>
+const tasks = (props) => {
+  return (
+    <MDBCol className='task' onClick={props.clicked}>
+      <MDBCard style={{ backgroundColor: "#d2d7EB", width: "30rem" }}>
+        <MDBCardBody>
+          <MDBCardTitle>{props.pretty_name}</MDBCardTitle>
+          <MDBCardText>Type: {props.type}</MDBCardText>
+          <MDBCardText>Passive: {String(props.passive)}</MDBCardText>
+          <MDBCardText>Description: {props.description}</MDBCardText>
+          <MDBCardText>References: {props.references}</MDBCardText>
 
-    <MDBCard.Text>Allowed Types: {props.allowed_types}</MDBCard.Text>
-    <MDBCard.Text>Example Entities: {props.example_entities}</MDBCard.Text>
-  </MDBCard>
-);
+          <MDBCardText>Allowed Types: {props.allowed_types}</MDBCardText>
+          <MDBCardText>Example Entities: {props.example_entities}</MDBCardText>
+          <MDBBtn href='#'>---></MDBBtn>
+        </MDBCardBody>
+      </MDBCard>
+      <br />
+    </MDBCol>
+  );
+};
 
-export default task;
+export default tasks;
