@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCol,
-} from "mdbreact";
+import Config from "../components/Config";
 import jsonData from "./testConfig.json";
 
 class ConfigContainer extends Component {
@@ -27,20 +19,13 @@ class ConfigContainer extends Component {
   }
 
   render() {
-    const showConfig = this.state.config.map((config) => (
-      <MDBCard
-        style={{
-          marginLeft: "15%",
-          marginRight: "15%",
-          marginTop: "10px",
-          paddingLeft: "4px",
-          backgroundColor: "#cfcfcf",
-        }}
-      >
-        <MDBCard.Title>Setting: {config.setting}</MDBCard.Title>
-        <MDBCard.Text>Password: {config.value}</MDBCard.Text>
-        <MDBCard.Text>Details: {config.comment}</MDBCard.Text>
-      </MDBCard>
+    const showConfig = this.state.config.map((config, index) => (
+      <Config
+        key={index}
+        setting={config.setting}
+        password={config.value}
+        details={config.comment}
+      />
     ));
 
     return <div>{showConfig}</div>;
