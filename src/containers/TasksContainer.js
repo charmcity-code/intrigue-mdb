@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { MDBCol } from "mdbreact";
-
+import Searchbar from "../components/Searchbar";
 import Tasks from "../components/Tasks";
 import EntityDetails from "./EntityDetails";
 
@@ -27,7 +26,7 @@ class TasksContainer extends Component {
     this.setState({ selectedTask: index });
   };
 
-  filterTasks = (e) => {
+  filterInput = (e) => {
     console.log(e.target.value);
     const updatedTasks = this.state.tasks.filter((task) => {
       return (
@@ -43,18 +42,6 @@ class TasksContainer extends Component {
   }
 
   render() {
-    const searchbar = (
-      <MDBCol md='12'>
-        <input
-          className='form-control'
-          placeholder='Search'
-          input
-          type='text'
-          onChange={this.filterTasks}
-        />
-      </MDBCol>
-    );
-
     const showTasks = this.state.tasks.map((task, index) => {
       index = index + 1;
       return (
@@ -91,7 +78,7 @@ class TasksContainer extends Component {
 
     return (
       <div>
-        {searchbar}
+        <Searchbar filter={this.filterInput} />
         <EntityDetails index={this.state.selectedTask} />
         {show}
       </div>
