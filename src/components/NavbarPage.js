@@ -12,8 +12,6 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdbreact";
-import { BrowserRouter as Router } from "react-router-dom";
-import ConfigContainer from "../containers/ConfigContainer";
 
 class NavbarPage extends Component {
   state = {
@@ -35,7 +33,7 @@ class NavbarPage extends Component {
         <MDBCollapse id='navbarCollapse3' isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem active>
-              <MDBNavLink to='/config'>[Default]</MDBNavLink>
+              <MDBNavLink to='/'>[Default]</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBDropdown>
@@ -51,13 +49,13 @@ class NavbarPage extends Component {
               </MDBDropdown>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to='#!'>Entities</MDBNavLink>
+              <MDBNavLink to='/entities'>Entities</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to='#!'>Results</MDBNavLink>
+              <MDBNavLink to='/results'>Results</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to='#!'>Issues</MDBNavLink>
+              <MDBNavLink to='/issues'>Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBDropdown>
@@ -113,6 +111,12 @@ class NavbarPage extends Component {
                   </MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to='/tasks'>Tasks</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to='/config'>Config</MDBNavLink>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
