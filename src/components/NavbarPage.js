@@ -25,7 +25,7 @@ class NavbarPage extends Component {
   render() {
     const style = { backgroundColor: "#0C2678" };
     return (
-      <MDBNavbar style={style} dark expand='md'>
+      <MDBNavbar className='sticky-top' style={style} dark expand='md'>
         <MDBNavbarBrand>
           <strong className='white-text'>Intrigue</strong>
         </MDBNavbarBrand>
