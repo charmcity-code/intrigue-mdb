@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Config from "../components/Config";
 import jsonData from "./testConfig.json";
+import Searchbar from "../components/Searchbar";
 
 class ConfigContainer extends Component {
   constructor(props) {
@@ -28,7 +29,12 @@ class ConfigContainer extends Component {
       />
     ));
 
-    return <div>{showConfig}</div>;
+    return (
+      <div>
+        <Searchbar />
+        {showConfig}
+      </div>
+    );
   }
 }
 
