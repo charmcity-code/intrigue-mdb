@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Searchbar from "../components/Searchbar";
 import Tasks from "../components/Tasks";
 import EntityDetails from "./EntityDetails";
+import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
 class TasksContainer extends Component {
   constructor(props) {
@@ -79,8 +80,15 @@ class TasksContainer extends Component {
     return (
       <div>
         <Searchbar filter={this.filterInput} />
-        <EntityDetails index={this.state.selectedTask} />
-        {show}
+
+        <MDBContainer>
+          <MDBRow>
+            <MDBCol md='5'>{show}</MDBCol>
+            <MDBCol md='6' className='position-fixed' style={{ right: "5%" }}>
+              <EntityDetails index={this.state.selectedTask} />
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
       </div>
     );
   }

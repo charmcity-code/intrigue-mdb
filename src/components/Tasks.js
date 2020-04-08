@@ -11,11 +11,11 @@ import {
 const tasks = (props) => {
   return (
     <MDBCol className='task' onClick={props.clicked}>
-      <MDBCard style={{ backgroundColor: "#d2d7EB", width: "30rem" }}>
+      <MDBCard style={{ backgroundColor: "#d2d7EB" }}>
         <MDBCardBody>
           <MDBCardTitle>{props.pretty_name}</MDBCardTitle>
-          <MDBCardText>Type: {props.type}</MDBCardText>
-          <MDBCardText>Passive: {String(props.passive)}</MDBCardText>
+          {/* <MDBCardText>Type: {props.type}</MDBCardText>
+          <MDBCardText>Passive: {String(props.passive)}</MDBCardText> */}
           <MDBCardText>Description: {props.description}</MDBCardText>
           <MDBCardText>References: {props.references}</MDBCardText>
 
