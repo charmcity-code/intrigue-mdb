@@ -23,7 +23,7 @@ class NavbarPage extends Component {
   };
 
   render() {
-    const style = { backgroundColor: "#0C2678" };
+    const style = { backgroundColor: "#100a41" };
     return (
       <MDBNavbar className='sticky-top' style={style} dark expand='md'>
         <MDBNavbarBrand>
