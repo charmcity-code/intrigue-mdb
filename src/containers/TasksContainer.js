@@ -49,13 +49,8 @@ class TasksContainer extends Component {
         <Tasks
           key={index}
           pretty_name={task.pretty_name}
-          type={task.type}
-          passive={task.passive}
           description={task.description}
-          reference={task.references}
           clicked={() => this.taskSelectedHandler(index)}
-          allowed_types={task.allowed_types}
-          examples={task.example_entities}
         />
       );
     });
@@ -66,25 +61,20 @@ class TasksContainer extends Component {
           key={index}
           pretty_name={task.pretty_name}
           type={task.type}
-          passive={task.passive}
-          description={task.description}
-          reference={task.references}
           clicked={() => this.taskSelectedHandler(index)}
-          allowed_types={task.allowed_types}
-          examples={task.example_entities}
         />
       );
     });
     const show = this.state.filtered.length === 0 ? showTasks : filteredTasks;
-
+    const style = { right: "2%" };
     return (
       <div>
         <Searchbar filter={this.filterInput} />
 
         <MDBContainer>
           <MDBRow>
-            <MDBCol md='5'>{show}</MDBCol>
-            <MDBCol md='6' className='position-fixed' style={{ right: "5%" }}>
+            <MDBCol md='6'>{show}</MDBCol>
+            <MDBCol md='6' className='position-fixed' style={style}>
               <EntityDetails index={this.state.selectedTask} />
             </MDBCol>
           </MDBRow>
