@@ -3,7 +3,6 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
   MDBCardTitle,
   MDBCardText,
   MDBCol,
@@ -17,9 +16,11 @@ class EntityDetails extends Component {
     if (this.props.index) {
       entity = <h1>{this.props.index}</h1>;
     }
+    const style = { backgroundColor: "#d2d7EB" };
+
     return (
       <MDBCol>
-        <MDBCard>
+        <MDBCard style={style}>
           <MDBCardBody>
             <MDBCardTitle>{entity}</MDBCardTitle>
           </MDBCardBody>

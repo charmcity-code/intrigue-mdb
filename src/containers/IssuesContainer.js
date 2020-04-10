@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class Issues extends Component {
   render() {
-    return <div style={{ color: "white" }}>Issues Container</div>;
+    const style = { color: "white" };
+    return <div style={style}>Issues Container</div>;
   }
 }
 

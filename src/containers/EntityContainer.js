@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class Entities extends Component {
   render() {
-    return <div style={{ color: "white" }}>Entities Container</div>;
+    const style = { color: "white" };
+    return <div style={style}>Entities Container</div>;
   }
 }
 
