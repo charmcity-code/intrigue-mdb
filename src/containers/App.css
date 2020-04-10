@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.btn-default {
+  background-color: #0074c6 !important;
+}
