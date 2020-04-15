@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Results extends Component {
-  render() {
-    const style = { color: "white" };
-    return <div style={style}>Results Container</div>;
-  }
-}
+const Results = () => {
+  const style = { color: "white" };
+  return <div style={style}>Results Container</div>;
+};
 
 export default Results;

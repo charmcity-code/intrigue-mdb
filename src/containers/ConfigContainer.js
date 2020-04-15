@@ -1,41 +1,27 @@
-import React, { Component } from "react";
-import Config from "../components/Config";
-import jsonData from "./testConfig.json";
-import Searchbar from "../components/Searchbar";
+import React from "react";
+import jsonData from "../containers/testConfig.json";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCol,
+} from "mdbreact";
 
-class ConfigContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      config: [],
-    };
-  }
-
-  getConfig() {
-    this.setState({ config: jsonData });
-  }
-
-  componentDidMount() {
-    this.getConfig();
-  }
-
-  render() {
-    const showConfig = this.state.config.map((config, index) => (
-      <Config
-        key={index}
-        setting={config.setting}
-        password={config.value}
-        details={config.comment}
-      />
-    ));
-
-    return (
-      <div>
-        <Searchbar />
-        {showConfig}
-      </div>
-    );
-  }
-}
-
+const ConfigContainer = () => {
+  return jsonData.map((config, index) => (
+    <MDBCol key={index}>
+      <MDBCard style={{ backgroundColor: "#d2d7EB", width: "30rem" }}>
+        <MDBCardBody>
+          <MDBCardTitle>Setting: {config.setting}</MDBCardTitle>
+          <MDBCardText>Password: {config.password}</MDBCardText>
+          <MDBCardText>Details: {config.details}</MDBCardText>
+          <MDBBtn href='#'>---></MDBBtn>
+        </MDBCardBody>
+      </MDBCard>
+      <br />
+    </MDBCol>
+  ));
+};
 export default ConfigContainer;

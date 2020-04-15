@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -8,26 +8,19 @@ import {
   MDBCol,
 } from "mdbreact";
 
-class EntityDetails extends Component {
-  render() {
-    let entity = "Create Entity";
-    console.log(this.props.index);
+const EntityDetails = ({ index }) => {
+  const style = { backgroundColor: "#d2d7EB" };
 
-    if (this.props.index) {
-      entity = <h1>{this.props.index}</h1>;
-    }
-    const style = { backgroundColor: "#d2d7EB" };
-
-    return (
-      <MDBCol>
-        <MDBCard style={style}>
-          <MDBCardBody>
-            <MDBCardTitle>{entity}</MDBCardTitle>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-    );
-  }
-}
+  return (
+    <MDBCol>
+      <MDBCard style={style}>
+        <h1>Create Entity</h1>
+        <MDBCardBody>
+          <MDBCardTitle>{index}</MDBCardTitle>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBCol>
+  );
+};
 
 export default EntityDetails;

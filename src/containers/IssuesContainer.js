@@ -1,10 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Issues extends Component {
-  render() {
-    const style = { color: "white" };
-    return <div style={style}>Issues Container</div>;
-  }
-}
+const Issues = () => {
+  const style = { color: "white" };
+  return <div style={style}>Issues Container</div>;
+};
 
 export default Issues;

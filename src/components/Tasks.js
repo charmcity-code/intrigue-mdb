@@ -9,13 +9,13 @@ import {
   MDBIcon,
 } from "mdbreact";
 
-const tasks = (props) => {
+const tasks = ({ clicked, pretty_name, description }) => {
   return (
-    <MDBCol className='task' onClick={props.clicked}>
+    <MDBCol className='task' onClick={clicked}>
       <MDBCard style={{ backgroundColor: "#d2d7EB" }}>
         <MDBCardBody>
-          <MDBCardTitle>{props.pretty_name}</MDBCardTitle>
-          <MDBCardText>Description: {props.description}</MDBCardText>
+          <MDBCardTitle>{pretty_name}</MDBCardTitle>
+          <MDBCardText>Description: {description}</MDBCardText>
 
           <MDBBtn style={{ float: "right" }} href='#'>
             <MDBIcon icon='angle-double-right' />
