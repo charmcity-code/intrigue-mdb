@@ -7,7 +7,7 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 const TasksContainer = () => {
   const [tasks, setTasks] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTask, setSelectedTask] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:7777/tasks.json")
@@ -27,8 +27,9 @@ const TasksContainer = () => {
     setFiltered(updatedTasks);
   };
 
-  const taskSelectedHandler = (index) => {
-    setSelectedTask(index);
+  const taskSelectedHandler = (task, e) => {
+    e.preventDefault();
+    setSelectedTask(task);
   };
 
   const showTasks = tasks.map((task, index) => {
@@ -38,7 +39,12 @@ const TasksContainer = () => {
         key={index}
         pretty_name={task.pretty_name}
         description={task.description}
-        clicked={() => taskSelectedHandler(index)}
+        clicked={(e) =>
+          taskSelectedHandler(
+            [task.type, task.pretty_name, task.allowed_types],
+            e
+          )
+        }
       />
     );
   });
@@ -49,7 +55,12 @@ const TasksContainer = () => {
         key={index}
         pretty_name={task.pretty_name}
         description={task.description}
-        clicked={() => taskSelectedHandler(index)}
+        clicked={(e) =>
+          taskSelectedHandler(
+            [task.type, task.pretty_name, task.allowed_types],
+            e
+          )
+        }
       />
     );
   });
@@ -58,11 +69,11 @@ const TasksContainer = () => {
   return (
     <div>
       <Searchbar filter={filterInput} />
-      <MDBContainer>
+      <MDBContainer style={{ paddingTop: "100px" }}>
         <MDBRow>
           <MDBCol md='6'>{show}</MDBCol>
           <MDBCol md='6' className='position-fixed' style={style}>
-            <EntityDetails index={selectedTask} />
+            <EntityDetails task={selectedTask} />
           </MDBCol>
         </MDBRow>
       </MDBContainer>
