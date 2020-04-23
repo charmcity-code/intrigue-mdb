@@ -10,10 +10,10 @@ const TasksContainer = () => {
   const [selectedTask, setSelectedTask] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:7777/tasks.json")
+    fetch("http://localhost:7777/api/v1/tasks")
       .then((res) => res.json())
       .then((data) => {
-        setTasks(data);
+        setTasks(data.result);
       });
   }, []);
 
@@ -33,18 +33,12 @@ const TasksContainer = () => {
   };
 
   const showTasks = tasks.map((task, index) => {
-    index = index + 1;
     return (
       <Tasks
         key={index}
         pretty_name={task.pretty_name}
         description={task.description}
-        clicked={(e) =>
-          taskSelectedHandler(
-            [task.type, task.pretty_name, task.allowed_types],
-            e
-          )
-        }
+        clicked={(e) => taskSelectedHandler(task, e)}
       />
     );
   });
@@ -55,17 +49,16 @@ const TasksContainer = () => {
         key={index}
         pretty_name={task.pretty_name}
         description={task.description}
-        clicked={(e) =>
-          taskSelectedHandler(
-            [task.type, task.pretty_name, task.allowed_types],
-            e
-          )
-        }
+        clicked={(e) => taskSelectedHandler(task, e)}
       />
     );
   });
   const show = filtered.length === 0 ? showTasks : filteredTasks;
   const style = { right: "2%" };
+
+  // const entityType = selectedTask.type;
+  // const entityName = selectedTask.pretty_name;
+  // const entityOptions = selectedTask.allowed_options;
   return (
     <div>
       <Searchbar filter={filterInput} />
@@ -73,7 +66,11 @@ const TasksContainer = () => {
         <MDBRow>
           <MDBCol md='6'>{show}</MDBCol>
           <MDBCol md='6' className='position-fixed' style={style}>
-            <EntityDetails task={selectedTask} />
+            <EntityDetails
+              type={selectedTask.type}
+              name={selectedTask.pretty_name}
+              options={selectedTask.allowed_options}
+            />
           </MDBCol>
         </MDBRow>
       </MDBContainer>
