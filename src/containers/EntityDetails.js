@@ -6,25 +6,64 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCol,
+  MDBListGroup,
+  MDBListGroupItem,
 } from "mdbreact";
 
 const EntityDetails = (props) => {
   const [entity, setEntity] = useState(props);
   const style = { backgroundColor: "#d2d7EB" };
+  const booleanOptions = !props.options
+    ? []
+    : props.options.filter((option) => option.regex === "boolean");
+  console.log(entity);
 
   useEffect(() => {
     setEntity(props);
   }, [props]);
 
-  // if no allowed_option, empty array else filter for boolean values and map
-  const optionName = !entity.options
+  // if (!props.options) return null;
+
+  const references = !entity.references
     ? []
-    : entity.options
+    : entity.references.map((reference, i) => (
+        <li key={i}>
+          <a href={reference}> Reference {i + 1}</a>
+        </li>
+      ));
+
+  const handleSwitchChange = (i) => {
+    console.log(booleanOptions[i].default);
+    console.log(!booleanOptions[i].default);
+
+    // let switchNumber = `switch${nr}`;
+    // this.setState({
+    //   [switchNumber]: !this.state[switchNumber]
+    // });
+  };
+
+  const options = !booleanOptions
+    ? []
+    : booleanOptions
         .filter((option) => option.regex === "boolean")
         .map((option, i) => (
-          <li style={{ listStyleType: "none" }} key={i}>
-            {option.name}
-          </li>
+          <div key={i} className='custom-control custom-switch'>
+            <input
+              type='checkbox'
+              className='custom-control-input'
+              id={`customSwitches_${i}`}
+              // uncontrolled Component - defaultChecked
+              defaultChecked={option.default}
+              onChange={() => handleSwitchChange(i)}
+              readOnly
+            />
+            <label
+              className='custom-control-label'
+              htmlFor={`customSwitches_${i}`}
+            >
+              {option.name}
+            </label>
+          </div>
         ));
 
   return (
@@ -33,14 +72,18 @@ const EntityDetails = (props) => {
         <MDBCardBody>
           <MDBCardTitle>Create Entity</MDBCardTitle>
           <MDBCardText>
+            <b>References:</b> {references}
+          </MDBCardText>
+          <MDBCardText>
             <b>Entity Type:</b> {entity.type}
           </MDBCardText>
           <MDBCardText>
             <b>Entity Name:</b> {entity.name}
           </MDBCardText>
-          <MDBCardText tag='div'>
-            <b>Options:</b> {optionName}
-          </MDBCardText>
+          <MDBListGroup>
+            <b>Options:</b>
+            {options}
+          </MDBListGroup>
         </MDBCardBody>
       </MDBCard>
     </MDBCol>
