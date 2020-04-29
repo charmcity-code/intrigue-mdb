@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Machine from "../components/Machine";
 import {
   MDBBtn,
   MDBCard,
@@ -16,7 +17,6 @@ const EntityDetails = (props) => {
   const booleanOptions = !props.options
     ? []
     : props.options.filter((option) => option.regex === "boolean");
-  console.log(entity);
 
   useEffect(() => {
     setEntity(props);
@@ -45,7 +45,7 @@ const EntityDetails = (props) => {
   const options = !booleanOptions
     ? []
     : booleanOptions
-        .filter((option) => option.regex === "boolean")
+        // .filter((option) => option.regex === "boolean")
         .map((option, i) => (
           <div key={i} className='custom-control custom-switch'>
             <input
@@ -67,26 +67,32 @@ const EntityDetails = (props) => {
         ));
 
   return (
-    <MDBCol>
-      <MDBCard style={style}>
-        <MDBCardBody>
-          <MDBCardTitle>Create Entity</MDBCardTitle>
-          <MDBCardText>
-            <b>References:</b> {references}
-          </MDBCardText>
-          <MDBCardText>
-            <b>Entity Type:</b> {entity.type}
-          </MDBCardText>
-          <MDBCardText>
-            <b>Entity Name:</b> {entity.name}
-          </MDBCardText>
-          <MDBListGroup>
-            <b>Options:</b>
-            {options}
-          </MDBListGroup>
-        </MDBCardBody>
-      </MDBCard>
-    </MDBCol>
+    <>
+      <MDBCol>
+        <MDBCard style={style}>
+          <MDBCardBody>
+            <MDBCardTitle>Create Entity</MDBCardTitle>
+            <MDBCardText>
+              <b>References:</b> {references}
+            </MDBCardText>
+            <MDBCardText>
+              <b>Entity Type:</b> {entity.type}
+            </MDBCardText>
+            <MDBCardText>
+              <b>Entity Name:</b> {entity.name}
+            </MDBCardText>
+            <MDBListGroup>
+              <b>Options:</b>
+              {options}
+            </MDBListGroup>
+            <MDBBtn>Add Machine</MDBBtn>
+            <MDBBtn>Run Single Task</MDBBtn>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+
+      <Machine />
+    </>
   );
 };
 
