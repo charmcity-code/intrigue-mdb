@@ -1,25 +1,26 @@
 import React from "react";
 import {
-  MDBBtn,
   MDBCard,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
   MDBCol,
-  MDBIcon,
 } from "mdbreact";
+import Modal from "./Modal";
 
 const tasks = (props) => {
   return (
     <MDBCol className='task'>
       <MDBCard style={{ backgroundColor: "#d2d7EB" }}>
         <MDBCardBody>
-          <MDBCardTitle>{props.pretty_name}</MDBCardTitle>
+          <MDBCardTitle>{props.name}</MDBCardTitle>
           <MDBCardText>Description: {props.description}</MDBCardText>
-
-          <MDBBtn style={{ float: "right" }} href='#' onClick={props.clicked}>
-            <MDBIcon icon='angle-double-right' />
-          </MDBBtn>
+          <Modal
+            type={props.type}
+            name={props.name}
+            options={props.options}
+            references={props.references}
+          />
         </MDBCardBody>
       </MDBCard>
       <br />
