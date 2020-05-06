@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCol,
+} from "mdbreact";
 
 const Machine = () => {
+  const style = { backgroundColor: "#d2d7EB" };
   const [loading, setLoading] = useState(true);
   const [machines, setMachines] = useState([
     { label: "Loading...", value: "" },
@@ -32,20 +42,30 @@ const Machine = () => {
   }, []);
 
   return (
-    <div>
-      <select
-        disabled={loading}
-        className='browser-default custom-select'
-        onChange={(e) => setValue(e.currentTarget.value)}
-      >
-        {machines.map(({ label, value }) => (
-          <option key={value} value={value}>
-            {label}
-          </option>
-        ))}
-      </select>
-      <p>{selected ? selected.description : ""}</p>
-    </div>
+    <MDBCol style={{ paddingTop: "10px" }}>
+      <MDBCard style={style}>
+        <MDBCardBody>
+          Machine Name:
+          <select
+            disabled={loading}
+            className='browser-default custom-select'
+            onChange={(e) => setValue(e.currentTarget.value)}
+          >
+            {machines.map(({ label, value }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          <MDBCardText style={{ paddingTop: "10px" }}>
+            {selected ? selected.description : ""}
+          </MDBCardText>
+          <MDBBtn size='sm' href='#'>
+            Run with Machine
+          </MDBBtn>
+        </MDBCardBody>
+      </MDBCard>
+    </MDBCol>
   );
 };
 
