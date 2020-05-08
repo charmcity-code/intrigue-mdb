@@ -8,11 +8,14 @@ import {
   MDBCardText,
   MDBCol,
   MDBListGroup,
-  MDBListGroupItem,
+  MDBIcon,
 } from "mdbreact";
 
 const EntityDetails = (props) => {
   const [entity, setEntity] = useState(props);
+  const [showMachine, setShowMachine] = useState(false);
+  const onClick = () => setShowMachine(true);
+
   const style = { backgroundColor: "#d2d7EB" };
   const booleanOptions = !props.options
     ? []
@@ -28,7 +31,10 @@ const EntityDetails = (props) => {
     ? []
     : entity.references.map((reference, i) => (
         <li key={i}>
-          <a href={reference}> Reference {i + 1}</a>
+          <a href={reference} rel='noopener noreferrer' target='_blank'>
+            {" "}
+            Reference {i + 1}
+          </a>
         </li>
       ));
 
@@ -71,27 +77,29 @@ const EntityDetails = (props) => {
       <MDBCol>
         <MDBCard style={style}>
           <MDBCardBody>
-            <MDBCardTitle>Create Entity</MDBCardTitle>
+            <MDBCardTitle>{props.name}</MDBCardTitle>
             <MDBCardText>
               <b>References:</b> {references}
             </MDBCardText>
             <MDBCardText>
               <b>Entity Type:</b> {entity.type}
             </MDBCardText>
-            <MDBCardText>
-              <b>Entity Name:</b> {entity.name}
-            </MDBCardText>
+
             <MDBListGroup>
               <b>Options:</b>
               {options}
             </MDBListGroup>
-            <MDBBtn>Add Machine</MDBBtn>
-            <MDBBtn>Run Single Task</MDBBtn>
+            <MDBBtn size='sm' onClick={onClick}>
+              Add Machine
+            </MDBBtn>
+            <MDBBtn size='sm'>
+              <MDBIcon icon='fas fa-server' />
+              {"  "} Run Single Task
+            </MDBBtn>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
-
-      <Machine />
+      {showMachine ? <Machine /> : null}
     </>
   );
 };

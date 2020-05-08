@@ -6,14 +6,12 @@ import {
   MDBModal,
   MDBModalBody,
   MDBModalHeader,
-  MDBModalFooter,
   MDBIcon,
 } from "mdbreact";
 
 class ModalPage extends Component {
   state = {
     modal8: false,
-    modal9: false,
   };
 
   toggle = (nr) => () => {
@@ -24,8 +22,6 @@ class ModalPage extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     return (
       <MDBContainer>
         <MDBBtn style={{ float: "right" }} onClick={this.toggle(8)}>
@@ -37,23 +33,15 @@ class ModalPage extends Component {
           fullHeight
           position='right'
         >
-          <MDBModalHeader toggle={this.toggle(8)}>
-            MDBModal title
-          </MDBModalHeader>
+          <MDBModalHeader toggle={this.toggle(8)}>New Task</MDBModalHeader>
           <MDBModalBody>
             <EntityDetails
-              type={this.props.type}
               name={this.props.name}
+              type={this.props.type}
               options={this.props.options}
               references={this.props.references}
             />
           </MDBModalBody>
-          <MDBModalFooter>
-            <MDBBtn color='secondary' onClick={this.toggle(8)}>
-              Close
-            </MDBBtn>
-            <MDBBtn color='primary'>Save changes</MDBBtn>
-          </MDBModalFooter>
         </MDBModal>
       </MDBContainer>
     );

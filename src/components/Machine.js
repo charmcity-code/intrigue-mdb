@@ -3,10 +3,9 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
-  MDBCardTitle,
   MDBCardText,
   MDBCol,
+  MDBIcon,
 } from "mdbreact";
 
 const Machine = () => {
@@ -42,10 +41,10 @@ const Machine = () => {
   }, []);
 
   return (
-    <MDBCol style={{ paddingTop: "10px" }}>
+    <MDBCol style={{ paddingTop: "15px" }}>
       <MDBCard style={style}>
         <MDBCardBody>
-          Machine Name:
+          <b>Machine Name:</b>
           <select
             disabled={loading}
             className='browser-default custom-select'
@@ -60,7 +59,9 @@ const Machine = () => {
           <MDBCardText style={{ paddingTop: "10px" }}>
             {selected ? selected.description : ""}
           </MDBCardText>
-          <MDBBtn size='sm' href='#'>
+          <MDBBtn style={{ float: "right" }} size='sm' href='#'>
+            <MDBIcon icon='fas fa-server' />
+            {"  "}
             Run with Machine
           </MDBBtn>
         </MDBCardBody>

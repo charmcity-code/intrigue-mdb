@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import NavbarPage from "../components/NavbarPage";
-import Default from "../containers/Default";
+import Default from "./Default";
 import TasksContainer from "./TasksContainer";
 import ConfigContainer from "./ConfigContainer";
 import EntityContainer from "./EntityContainer";

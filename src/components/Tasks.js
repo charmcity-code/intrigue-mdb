@@ -5,6 +5,8 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCol,
+  MDBRow,
+  MDBIcon,
 } from "mdbreact";
 import Modal from "./Modal";
 
@@ -13,14 +15,26 @@ const tasks = (props) => {
     <MDBCol className='task'>
       <MDBCard style={{ backgroundColor: "#d2d7EB" }}>
         <MDBCardBody>
-          <MDBCardTitle>{props.name}</MDBCardTitle>
-          <MDBCardText>Description: {props.description}</MDBCardText>
-          <Modal
-            type={props.type}
-            name={props.name}
-            options={props.options}
-            references={props.references}
-          />
+          <MDBCardTitle>
+            <MDBIcon icon='fas fa-tasks' />
+            {"  "}
+            {props.name}
+          </MDBCardTitle>
+          <MDBRow>
+            <MDBCol md='9'>
+              <MDBCardText>
+                <b>Description:</b> {props.description}
+              </MDBCardText>
+            </MDBCol>
+            <MDBCol md='3'>
+              <Modal
+                type={props.type}
+                name={props.name}
+                options={props.options}
+                references={props.references}
+              />
+            </MDBCol>
+          </MDBRow>
         </MDBCardBody>
       </MDBCard>
       <br />
