@@ -30,6 +30,7 @@ const tasks = (props) => {
               <Modal
                 type={props.type}
                 pretty_name={props.pretty_name}
+                name={props.name}
                 options={props.options}
                 references={props.references}
                 allowed_types={props.allowed_types}
