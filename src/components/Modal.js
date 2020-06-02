@@ -41,6 +41,7 @@ class ModalPage extends Component {
               options={this.props.options}
               references={this.props.references}
               allowed_types={this.props.allowed_types}
+              entity_name={this.props.entity_name}
             />
           </MDBModalBody>
         </MDBModal>

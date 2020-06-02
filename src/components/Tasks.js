@@ -33,6 +33,7 @@ const tasks = (props) => {
                 options={props.options}
                 references={props.references}
                 allowed_types={props.allowed_types}
+                entity_name={props.entity_name}
               />
             </MDBCol>
           </MDBRow>

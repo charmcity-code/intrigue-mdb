@@ -15,6 +15,7 @@ const EntityDetails = (props) => {
   const [entity, setEntity] = useState(props);
   const [showMachine, setShowMachine] = useState(false);
   const [value, setValue] = useState(props.allowed_types[0]);
+  const [input, setInput] = useState(null);
   const onClick = () => setShowMachine(true);
 
   const handleTaskRunnerClick = () =>
@@ -107,6 +108,16 @@ const EntityDetails = (props) => {
                   </option>
                 ))}
               </select>
+            </MDBCardText>
+
+            <MDBCardText className='form-group'>
+              <b>Entity Name:</b>
+              <input
+                type='text'
+                className='form-control'
+                placeholder={entity.entity_name}
+                onChange={(e) => setInput(e.target.value)}
+              />
             </MDBCardText>
 
             <MDBListGroup>

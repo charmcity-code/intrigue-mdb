@@ -26,6 +26,15 @@ const TasksContainer = () => {
   };
 
   const showTasks = tasks.map((task, index) => {
+    let exampleEntity =
+      !task.example_entities[0] ||
+      !task.example_entities[0].details ||
+      !task.example_entities[0].details.name
+        ? ""
+        : task.example_entities[0].details.name;
+
+    console.log(task.name, exampleEntity);
+
     return (
       <Tasks
         key={index}
@@ -35,11 +44,19 @@ const TasksContainer = () => {
         references={task.references}
         options={task.allowed_options}
         allowed_types={task.allowed_types}
+        entity_name={exampleEntity}
       />
     );
   });
 
   const filteredTasks = filtered.map((task, index) => {
+    let exampleEntity =
+      !task.example_entities[0] ||
+      !task.example_entities[0].details ||
+      !task.example_entities[0].details.name
+        ? {}
+        : task.example_entities[0].details.name;
+
     return (
       <Tasks
         key={index}
@@ -49,9 +66,11 @@ const TasksContainer = () => {
         references={task.references}
         options={task.allowed_options}
         allowed_types={task.allowed_types}
+        entity_name={exampleEntity}
       />
     );
   });
+
   const show = filtered.length === 0 ? showTasks : filteredTasks;
 
   return (
