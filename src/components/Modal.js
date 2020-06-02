@@ -36,10 +36,11 @@ class ModalPage extends Component {
           <MDBModalHeader toggle={this.toggle(8)}>New Task</MDBModalHeader>
           <MDBModalBody>
             <EntityDetails
-              name={this.props.name}
+              pretty_name={this.props.pretty_name}
               type={this.props.type}
               options={this.props.options}
               references={this.props.references}
+              allowed_types={this.props.allowed_types}
             />
           </MDBModalBody>
         </MDBModal>

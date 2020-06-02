@@ -29,11 +29,12 @@ const TasksContainer = () => {
     return (
       <Tasks
         key={index}
-        name={task.pretty_name}
+        pretty_name={task.pretty_name}
         description={task.description}
         type={task.type}
         references={task.references}
         options={task.allowed_options}
+        allowed_types={task.allowed_types}
       />
     );
   });
@@ -42,11 +43,12 @@ const TasksContainer = () => {
     return (
       <Tasks
         key={index}
-        name={task.pretty_name}
+        pretty_name={task.pretty_name}
         description={task.description}
         type={task.type}
         references={task.references}
         options={task.allowed_options}
+        allowed_types={task.allowed_types}
       />
     );
   });

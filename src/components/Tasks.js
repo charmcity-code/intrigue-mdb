@@ -18,7 +18,7 @@ const tasks = (props) => {
           <MDBCardTitle>
             <MDBIcon icon='fas fa-tasks' />
             {"  "}
-            {props.name}
+            {props.pretty_name}
           </MDBCardTitle>
           <MDBRow>
             <MDBCol md='9'>
@@ -29,9 +29,10 @@ const tasks = (props) => {
             <MDBCol md='3'>
               <Modal
                 type={props.type}
-                name={props.name}
+                pretty_name={props.pretty_name}
                 options={props.options}
                 references={props.references}
+                allowed_types={props.allowed_types}
               />
             </MDBCol>
           </MDBRow>
