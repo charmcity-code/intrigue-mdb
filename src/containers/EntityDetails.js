@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Machine from "../components/Machine";
+import axios from "axios";
 import {
   MDBBtn,
   MDBCard,
@@ -15,13 +16,32 @@ const EntityDetails = (props) => {
   const [entity, setEntity] = useState(props);
   const [showMachine, setShowMachine] = useState(false);
   const [value, setValue] = useState(props.allowed_types[0]);
-  const [input, setInput] = useState(null);
+  const [input, setInput] = useState(props.entity_name);
   const onClick = () => setShowMachine(true);
 
-  const handleTaskRunnerClick = () =>
-    console.log({
-      project_name: "testxx",
-    });
+  const taskResult = {
+    project_name: "Default",
+    task_name: props.name,
+    entity_type_string: value,
+    entity_name: input,
+  };
+
+  const handleTaskRunnerClick = () => {
+    const postTask = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(taskResult),
+    };
+
+    axios
+      .post(`https://intrigue-mdb.firebaseio.com/tasks.json`, {
+        // https://intrigue-mdb.firebaseio.com/tasks.json
+        // http://localhost:7777/api/v1/task_result?key=intrigue
+        postTask,
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+  };
 
   const style = { backgroundColor: "#d2d7EB" };
 
