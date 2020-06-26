@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Machine from "../components/Machine";
-import axios from "axios";
 import {
   MDBBtn,
   MDBCard,
@@ -33,12 +32,7 @@ const EntityDetails = (props) => {
       body: JSON.stringify(taskResult),
     };
 
-    axios
-      .post(`https://intrigue-mdb.firebaseio.com/tasks.json`, {
-        // https://intrigue-mdb.firebaseio.com/tasks.json
-        // http://localhost:7777/api/v1/task_result?key=intrigue
-        postTask,
-      })
+    fetch(`http://localhost:7777/api/v1/task_result?key=intrigue`, postTask)
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
   };
