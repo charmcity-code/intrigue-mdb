@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Searchbar from "../components/Searchbar";
-import Tasks from "../components/Tasks";
-import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import React, { useState, useEffect } from 'react';
+import Searchbar from '../components/Searchbar';
+import Tasks from '../components/Tasks';
+import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 
 const TasksContainer = () => {
   const [tasks, setTasks] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
+  const getTasks = 'https://localhost:7777/api/v1/tasks';
   useEffect(() => {
-    fetch("http://localhost:7777/api/v1/tasks")
+    fetch(getTasks)
       .then((res) => res.json())
       .then((data) => {
         setTasks(data.result);
@@ -62,7 +63,7 @@ const TasksContainer = () => {
   return (
     <div>
       <Searchbar filter={filterInput} />
-      <MDBContainer style={{ paddingTop: "100px" }}>
+      <MDBContainer style={{ paddingTop: '100px' }}>
         <MDBRow>
           <MDBCol md='8' className='offset-md-2'>
             {show}
