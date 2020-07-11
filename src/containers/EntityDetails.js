@@ -14,9 +14,15 @@ import {
 const EntityDetails = (props) => {
   const [entity, setEntity] = useState(props);
   const [showMachine, setShowMachine] = useState(false);
-  const [value, setValue] = useState(props.allowed_types[0]);
+  const [allowedTypes, setAllowedTypes] = useState(props.allowed_types[0]);
   const [input, setInput] = useState(props.entity_name);
   const onClick = () => setShowMachine(true);
+  const [machineValue, setMachineValue] = useState();
+
+  // function to update state from child component
+  const updateMachine = (machine) => {
+    setMachineValue(machine);
+  };
 
   // {
   // :project_name => "Default", # string, any valie project name, see /api/v1/projects
@@ -36,21 +42,30 @@ const EntityDetails = (props) => {
   const taskResult = {
     project_name: 'Default',
     task_name: props.name,
-    entity_type_string: value,
+    entity_type_string: allowedTypes,
     entity_name: input,
+    entity_details: {},
+    task_options: [],
+    handler_names: [],
+    machine_name: machineValue,
+    machine_depth: 1,
+    auto_enrich: 1,
+    auto_scope: 1,
+    queue_name: 'task',
   };
 
-  const postApi = `https://localhost:7777/api/v1/task_result?key=intrigue`;
+  // const postApi = `https://localhost:7777/api/v1/task_result?key=intrigue`;
   const handleTaskRunnerClick = () => {
-    const postTask = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(taskResult),
-    };
+    // const postTask = {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(taskResult),
+    // };
 
-    fetch(postApi, postTask)
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+    // fetch(postApi, postTask)
+    //   .then((res) => console.log(res))
+    //   .catch((error) => console.log(error));
+    console.log(taskResult);
   };
 
   const style = { backgroundColor: '#d2d7EB' };
@@ -130,11 +145,11 @@ const EntityDetails = (props) => {
               <b>Allowed Entities:</b>
               <select
                 className='browser-default custom-select'
-                onChange={(e) => setValue(e.currentTarget.value)}
+                onChange={(e) => setAllowedTypes(e.currentTarget.value)}
               >
-                {entity.allowed_types.map((value, i) => (
-                  <option key={i} value={value}>
-                    {value}
+                {entity.allowed_types.map((allowedTypes, i) => (
+                  <option key={i} value={allowedTypes}>
+                    {allowedTypes}
                   </option>
                 ))}
               </select>
@@ -164,7 +179,7 @@ const EntityDetails = (props) => {
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
-      {showMachine ? <Machine /> : null}
+      {showMachine ? <Machine onMachineUpdate={updateMachine} /> : null}
     </>
   );
 };

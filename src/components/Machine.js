@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   MDBBtn,
   MDBCard,
@@ -6,20 +6,25 @@ import {
   MDBCardText,
   MDBCol,
   MDBIcon,
-} from "mdbreact";
+} from 'mdbreact';
 
-const Machine = () => {
-  const style = { backgroundColor: "#d2d7EB" };
+const Machine = ({ onMachineUpdate }) => {
+  const style = { backgroundColor: '#d2d7EB' };
   const [loading, setLoading] = useState(true);
   const [machines, setMachines] = useState([
-    { label: "Loading...", value: "" },
+    { label: 'Loading...', value: '' },
   ]);
-  const [value, setValue] = useState("External Discovery - Light, Active");
+  const [value, setValue] = useState('external_discovery_light_active');
   const selected = machines.find((mac) => mac.value === value);
 
   useEffect(() => {
+    onMachineUpdate(value);
+  }, [value, onMachineUpdate]);
+
+  useEffect(() => {
+    const machineList = fetch('https://localhost:7777/api/v1/machines');
     let unmounted = false;
-    fetch("http://localhost:7777/api/v1/machines")
+    machineList
       .then((res) => res.json())
       .then((data) => {
         if (!unmounted) {
@@ -28,7 +33,7 @@ const Machine = () => {
               .filter((machine) => machine.user_selectable)
               .map((machine) => ({
                 label: machine.pretty_name,
-                value: machine.pretty_name,
+                value: machine.name,
                 description: machine.description,
               }))
           );
@@ -40,15 +45,21 @@ const Machine = () => {
     };
   }, []);
 
+  const handleMachineSelection = (e) => {
+    setValue(e.currentTarget.value);
+    // updates state in parent component
+    onMachineUpdate(value);
+  };
+
   return (
-    <MDBCol style={{ paddingTop: "15px" }}>
+    <MDBCol style={{ paddingTop: '15px' }}>
       <MDBCard style={style}>
         <MDBCardBody>
           <b>Machine Name:</b>
           <select
             disabled={loading}
             className='browser-default custom-select'
-            onChange={(e) => setValue(e.currentTarget.value)}
+            onChange={(e) => handleMachineSelection(e)}
           >
             {machines.map(({ label, value }) => (
               <option key={value} value={value}>
@@ -56,12 +67,12 @@ const Machine = () => {
               </option>
             ))}
           </select>
-          <MDBCardText style={{ paddingTop: "10px" }}>
-            {selected ? selected.description : ""}
+          <MDBCardText style={{ paddingTop: '10px' }}>
+            {selected ? selected.description : ''}
           </MDBCardText>
-          <MDBBtn style={{ float: "right" }} size='sm' href='#'>
+          <MDBBtn style={{ float: 'right' }} size='sm' href='#'>
             <MDBIcon icon='fas fa-server' />
-            {"  "}
+            {'  '}
             Run with Machine
           </MDBBtn>
         </MDBCardBody>
